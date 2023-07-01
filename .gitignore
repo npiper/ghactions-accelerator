@@ -1,0 +1,34 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Build files
+dist/
+build/
+
+# Editor and IDE files
+.vscode/
+.idea/
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Compiled binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Testing frameworks
+jest.config.js
+
+# Miscellaneous
+yarn-error.log
+coverage/

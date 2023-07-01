@@ -1,0 +1,15 @@
+{
+  "name": "secret-encryption",
+  "version": "1.0.0",
+  "description": "Encrypt a secret using a public key",
+  "main": "encrypt.js",
+  "dependencies": {
+    "libsodium-wrappers": "^0.7.11",
+    "sodium": "^3.0.2"
+  },
+  "scripts": {
+    "start": "node encrypt.js"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
