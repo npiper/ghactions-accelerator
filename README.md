@@ -30,7 +30,7 @@ To use this script, you need to have the following software installed:
 
 1. Clone this repository or copy the shell script to your local machine.
 2. Open a terminal and navigate to the directory containing the script.
-3. Make the script executable if needed: `chmod +x create-repo.sh`.
+3. Make the script executable if needed: `chmod +x createNewRepo.sh`.
 4. Run the script, providing the desired repository name as an argument: `./create-repo.sh <repository-name>`.
 5. The script will create the repository and print the owner/repo name and the HTTPS format remote URL.
 
@@ -39,7 +39,7 @@ To use this script, you need to have the following software installed:
 To create a new repository named `my-new-repo`, run the following command:
 
 ```bash
-./create-repo.sh my-new-repo
+./createNewRepo.sh my-new-repo
 ```
 
 ### Adding Remote Origin and Pushing the First Commit
