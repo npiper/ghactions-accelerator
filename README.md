@@ -19,14 +19,49 @@ To use this script, you need to have the following software installed:
 2. `git`: Version control system for managing repositories. Install it by following the instructions for your operating system.
 
 
-### Initializing a Local Repository
+## Prerequisite: Compiling the node `createSecret.js` Script
+
+Before being able to script writing of repository secrets, you need to setup the node environment for the `createSecret.js` script. This is later used to encrypt the secret values using a public key from the created Github Repo. 
+
+This script uses the `libsodium` library for encryption. Follow the steps below to compile the script:
+
+### Prerequisites
+
+Make sure you have the following prerequisites set up on your system:
+
+- Node.js: Ensure that you have Node.js installed on your machine. You can download it from [https://nodejs.org](https://nodejs.org) and follow the installation instructions specific to your operating system.
+
+### Steps to Run the Script
+
+1. Check out the repository to your local machine using Git:
+
+   ```bash
+   git clone https://github.com/npiper/npm-sodium.git
+   ```
+
+2. Navigate to the repository's root directory:
+
+   ```bash
+   cd npm-sodium
+   ```
+
+3. Install the required dependencies by running the following command:
+
+   ```bash
+   npm install
+   ```
+
+> Note: The `createSecret.js` script uses the `libsodium` library for encryption, which ensures secure encryption of secrets. The encryption process is handled within the script, and the encrypted values will be used when setting up repository secrets.
+
+
+## Initializing a Local Repository
 
 1. In the terminal, navigate to the directory where you want to initialize the local repository.
 2. Run the following command to initialize the repository: `git init`.
 3. Add and commit the first local commit using the necessary `git add` and `git commit` commands.
 
 
-## Usage
+### Usage to create a new Github Repo
 
 1. Clone this repository or copy the shell script to your local machine.
 2. Open a terminal and navigate to the directory containing the script.
@@ -34,7 +69,7 @@ To use this script, you need to have the following software installed:
 4. Run the script, providing the desired repository name as an argument: `./create-repo.sh <repository-name>`.
 5. The script will create the repository and print the owner/repo name and the HTTPS format remote URL.
 
-## Example
+### Example
 
 To create a new repository named `my-new-repo`, run the following command:
 
@@ -49,115 +84,56 @@ To create a new repository named `my-new-repo`, run the following command:
 3. Push the first commit to the remote origin using the following command: `git push -u origin master`.
 
 
+## Creating Repository Secrets
 
-*Usage*:
+Once your remote Repo is created, in order to create repository secrets for your newly created repository, you can use the provided shell script `createRepoSecrets.sh`. This script encrypts and sets the necessary secrets in your repository for use in workflows. Follow the steps below:
+
+### Prerequisites
+
+Before creating repository secrets, make sure you have completed the following prerequisites:
+
+1. Ensure that you have executed the earlier `createNewRepo.sh` script successfully and have obtained the owner/repo name and the HTTPS format remote URL.
+2. That you have a local environment variable with a GitHub Token value set that can add Repository secrets in the varaible `GIT_TOKEN`
+3. An nodeJS envrionment that has been created so that the dependent encryption script `createSecret.js` can be executed by the Script
+4. Set up the necessary environment variables required for creating secrets. These environment variables should contain the values you want to set as secrets. Make sure the values are accessible within your local environment.
+
+### Steps to Create Repository Secrets
+
+1. Open a terminal and navigate to the directory containing the `createRepoSecrets.sh` script.
+2. Make the script executable if needed: `chmod +x createRepoSecrets.sh`.
+3. Run the script, providing the owner/repo name as an argument: `./createRepoSecrets.sh <owner>/<repo>`.
+4. The script will attempt to retrieve the repository's public key using the GitHub API.
+5. The script will encrypt the secret values provided in the script using the public key.
+6. Encrypted secrets will be created and set in the repository using the GitHub API.
+
+> Note: The provided script assumes you have a `createSecret.js` script or function that handles the encryption process. Make sure to have this script or function in the same directory as `createRepoSecrets.sh` for successful execution.
+
+Once the script completes successfully, the repository secrets will be available for use in your workflows.
+
+## Example
+
+To create repository secrets for the repository `npiper/my-new-repo`, run the following command:
+
+```bash
+./createRepoSecrets.sh npiper/my-new-repo
+```
 
 
-https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
+## References
 
-## Create the Repo
 
 
 https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-for-the-authenticated-user
 
-```
-#!/bin/bash
-
-REPO_NAME=$1
-TOKEN=$GIT_TOKEN
-OWNER="<YOUR-USERNAME>"
-
-URL="https://api.github.com/user/repos"
-
-response=$(curl -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -d "{\"name\":\"${REPO_NAME}\"}" \
-  "${URL}")
-
-OWNER_REPONAME=$(echo "$response" | jq -r '.full_name')
-
-echo "Owner/Repo Name: $OWNER_REPONAME"
-```
+https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 
-## Get the new REPO's public key
 
 https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#get-a-repository-public-key
 
-'OWNER' = Repo Org / Owne
-'REPO' = new Repo name
+### GitHub API endpoint for creating repository secrets
 
-```
-#!/bin/bash
-
-OWNER_REPONAME=$1  # First argument: OWNER_REPONAME
-TOKEN=$GIT_TOKEN
-
-URL="https://api.github.com/repos/${OWNER_REPONAME}/actions/secrets/public-key"
-
-response=$(curl -s -L \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  "${URL}")
-
-KEY=$(echo "$response" | jq -r '.key')
-KEY_ID=$(echo "$response" | jq -r '.keyid')
-
-echo "Owner/Repo Name: ${OWNER_REPONAME}"
-echo "Key: ${KEY}"
-echo "Key ID: ${KEY_ID}"
-```
-
-## Encrypt the local tokens into the Repo secrets using the Keys
-
-
-#!/bin/bash
-
-# Define the secret names
-SECRET_NAME_1="GIT_USER_NAME"
-SECRET_NAME_2="DOCKER_USERNAME"
-
-# Retrieve the secret values from environment variables
-SECRET_VALUE_1="${GIT_USER_NAME}"
-SECRET_VALUE_2="${DOCKER_USERNAME}"
-
-# Function to encrypt a secret using Node.js script
-encryptSecret() {
-  local key=$1
-  local secret=$2
-
-  # Invoke the Node.js script and pass the key and secret as command line arguments
-  encryptedSecret=$(node createSecret.js "$key" "$secret")
-  echo "$encryptedSecret"
-}
-
-# Encrypt secrets
-ENCRYPTED_SECRET_1=$(encryptSecret "encryption-key-1" "$SECRET_VALUE_1")
-ENCRYPTED_SECRET_2=$(encryptSecret "encryption-key-2" "$SECRET_VALUE_2")
-
-# GitHub API endpoint for creating repository secrets
 OWNER_REPO="owner/examplerepo"  # Replace with your repository path
+
 API_URL="https://api.github.com/repos/$OWNER_REPO/actions/secrets"
-
-# Function to create a repository secret using curl
-createSecret() {
-  local name=$1
-  local value=$2
-
-  curl -X PUT \
-    -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: Bearer $GIT_TOKEN" \
-    -H "Content-Type: application/json" \
-    -d "{\"encrypted_value\":\"$value\",\"key_id\":\"public-key-id\"}" \
-    "$API_URL/$name"
-}
-
-# Create repository secrets
-createSecret "$SECRET_NAME_1" "$ENCRYPTED_SECRET_1"
-createSecret "$SECRET_NAME_2" "$ENCRYPTED_SECRET_2"
-
-
-
