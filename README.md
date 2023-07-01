@@ -17,6 +17,7 @@ To use this script, you need to have the following software installed:
 
 1. `curl`: Command-line tool for making HTTP requests. It is usually pre-installed on most Unix-based systems.
 2. `git`: Version control system for managing repositories. Install it by following the instructions for your operating system.
+3. `npm` and Node.js: Ensure that you have Node.js installed on your machine. You can download it from [https://nodejs.org](https://nodejs.org) and follow the installation instructions specific to your operating system.
 
 
 ## Prerequisite: Compiling the node `createSecret.js` Script
@@ -24,12 +25,6 @@ To use this script, you need to have the following software installed:
 Before being able to script writing of repository secrets, you need to setup the node environment for the `createSecret.js` script. This is later used to encrypt the secret values using a public key from the created Github Repo. 
 
 This script uses the `libsodium` library for encryption. Follow the steps below to compile the script:
-
-### Prerequisites
-
-Make sure you have the following prerequisites set up on your system:
-
-- Node.js: Ensure that you have Node.js installed on your machine. You can download it from [https://nodejs.org](https://nodejs.org) and follow the installation instructions specific to your operating system.
 
 ### Steps to Run the Script
 
