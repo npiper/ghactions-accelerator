@@ -1,6 +1,7 @@
 # GitHub Actions Accelerator
 
-Used to push up my development environment and access key secrets to be auto-created in new Github Repos so they can be used by GitHub actions.
+Convenience scripts from command line to create new Repos and  push up my development environment 
+and access key secrets to be auto-created in new Github Repos so they can be used by GitHub actions.
 
 
 ## Prerequisites
