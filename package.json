@@ -8,8 +8,12 @@
     "sodium": "^3.0.2"
   },
   "scripts": {
-    "start": "node createSecret.js"
+    "start": "node createSecret.js",
+    "test": "jest ./tests/createSecret.test.js"
   },
   "author": "Your Name",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
