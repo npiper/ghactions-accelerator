@@ -118,7 +118,28 @@ To create repository secrets for the repository `npiper/my-new-repo`, run the fo
 ./createRepoSecrets.sh npiper/my-new-repo
 ```
 
+## Forking for your own use
 
+This should be usable for your personal repos if you just replace the value `npiper` with your own personal user in these scripts.
+
+Need to create a Github token that has permissions to create / read repos and add secrets.
+
+These are the local environment variables I have behind the defaults;
+
+```
+' GIT User Name
+GIT_USER_NAME
+
+'DockerHub User/Pass
+DOCKER_USERNAME
+DOCKER_PASSWORD
+
+'AWS Signin details
+
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_DEFAULT_REGION
+```
 
 ## References
 
