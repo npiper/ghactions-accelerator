@@ -2,6 +2,54 @@
 
 Used to push up my development environment and access key secrets to be auto-created in new Github Repos so they can be used by GitHub actions.
 
+
+## Prerequisites
+
+Before using this script, ensure that you have the following:
+
+1. A GitHub personal access token with appropriate permissions to create repositories. You can create a token by following the instructions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+2. The `GIT_TOKEN` environment variable must be set with your GitHub personal access token.
+
+## Installation
+
+To use this script, you need to have the following software installed:
+
+
+1. `curl`: Command-line tool for making HTTP requests. It is usually pre-installed on most Unix-based systems.
+2. `git`: Version control system for managing repositories. Install it by following the instructions for your operating system.
+
+
+### Initializing a Local Repository
+
+1. In the terminal, navigate to the directory where you want to initialize the local repository.
+2. Run the following command to initialize the repository: `git init`.
+3. Add and commit the first local commit using the necessary `git add` and `git commit` commands.
+
+
+## Usage
+
+1. Clone this repository or copy the shell script to your local machine.
+2. Open a terminal and navigate to the directory containing the script.
+3. Make the script executable if needed: `chmod +x create-repo.sh`.
+4. Run the script, providing the desired repository name as an argument: `./create-repo.sh <repository-name>`.
+5. The script will create the repository and print the owner/repo name and the HTTPS format remote URL.
+
+## Example
+
+To create a new repository named `my-new-repo`, run the following command:
+
+```bash
+./create-repo.sh my-new-repo
+```
+
+### Adding Remote Origin and Pushing the First Commit
+
+1. In the terminal, navigate to the local repository directory.
+2. Run the following command to add the remote origin: `git remote add origin <repository-url>`, replacing `<repository-url>` with the captured `Repo URL` from running the script.
+3. Push the first commit to the remote origin using the following command: `git push -u origin master`.
+
+
+
 *Usage*:
 
 
