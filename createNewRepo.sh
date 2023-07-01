@@ -16,4 +16,9 @@ OWNER_REPONAME=$(echo "$response" | jq -r '.full_name')
 REPO_URL=$(echo "$response" | jq -r '.html_url')
 
 echo "Owner/Repo Name: $OWNER_REPONAME"
-echo "Repo URL: $REPO_URL"
+echo "Repo URL: $REPO_URL"git 
+
+echo "To add remote origin and push to the repository, run the following commands:"
+echo
+echo "git remote add origin $REPO_URL"
+echo "git push -u origin master"
