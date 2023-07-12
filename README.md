@@ -50,6 +50,8 @@ This script uses the `libsodium` library for encryption. Follow the steps below 
 > Note: The `createSecret.js` script uses the `libsodium` library for encryption, which ensures secure encryption of secrets. The encryption process is handled within the script, and the encrypted values will be used when setting up repository secrets.
 
 
+![Creation](http://www.plantuml.com/plantuml/svg/TP5HQzim483VzIkkeG_hWssonp9AJQ9b9cbIB8So61Z5lYG2MnBIUMMK_FT5gPSqNM9iRDttdUwiU_Ga7NLjmsvgN2kD89xphE1YcSzWIsJzVP8u-Hfl56sxLUVHLKOJQeehqoQsaJfaHvxgHgsIZMfMqkrl6PsGTOhG9x-7yJ3f5-n6wQhfQknSyw5YybubaXKfetriGsEC53K8GhPs_yhH6g_8k3ym-G7fGGI1bKFoZ3ciIEhDtXjykptVxE6NdXm2VP8VWFImsVOhU6ECGRZMfgdHmK1RPT4bjsyEhTaTxF0Ln3ElBpuu0kb8hML5CCcASYbuNixJ9_w9ZHUZwPu4V9q-fqAyBFBn9vg-Y38TZRWGvPJ_BBDBNF1HpeiFsWLdpB-dorbHvdoIBUONcYyMKpw_zbFyASrc0UvOU7QCiSgqrcZK19L3IJZ7rp2ls6z1-bFiFoz8_J6UkSUv7bCXYXxUnt0FNuPtlNU8iBES89vc4-olTv3MDVX_Ux97r7NNDdy1)
+
 ## Initializing a Local Repository
 
 1. In the terminal, navigate to the directory where you want to initialize the local repository.
