@@ -1,0 +1,34 @@
+@startuml
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/sprites
+!includeurl SPRITESURL/github-actions.puml
+
+title Sample Repository GH Action Secrets
+
+rectangle "<$github-actions>\nGithub Actions" as ghActions {
+
+
+     folder "npiper/${repo}" as repo {
+
+     folder "Secrets" {
+
+     artifact GIT_USER_NAME
+     artifact DOCKER_USERNAME
+     artifact DOCKER_PASSWORD
+     artifact AWS_ACCESS_KEY_ID
+     artifact AWS_SECRET_ACCESS_KEY
+     artifact AWS_DEFAULT_REGION
+     artifact GIT_TOKEN
+     artifact GIT_USER_EMAIL
+   }
+  }
+}
+
+
+component createNewRepo.sh as createNew
+component createRepoSecrets.sh as createSecrets
+
+createNew --> repo : (1) create repo
+createSecrets --> "Secrets" : (2) Add secrets
+
+
+@enduml
