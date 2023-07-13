@@ -27,6 +27,12 @@ Before being able to script writing of repository secrets, you need to setup the
 
 This script uses the `libsodium` library for encryption. Follow the steps below to compile the script:
 
+### createSecret dependency diagram
+
+![Dependencies](http://www.plantuml.com/plantuml/svg/RP11IiP034RtESNmxnNT_vGkl85B4Oapd-tODZCa6Og8TxUb2wMw2k6zHo3KcxDwMsQoAKjbvILeQP9YKO66-xjVm4PEPSqoNAzINewjwy8RpuR_jJNx-2EwDj2O4yAPc4DH_AE2Y2h7YGU4IrImun7RzDjtkspP0oeaGMA6RTqdXV0qvrShARVbPbMk5MhFvmExTZX_qHTH3qdx3-WR)
+
+The dependencies are provided in the `package.json` file in the root directory.
+
 ### Steps to Run the Script
 
 1. Check out the repository to your local machine using Git:
