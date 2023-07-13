@@ -1,0 +1,14 @@
+
+@startuml
+skinparam roundcorner 10
+skinparam shadowing<<no_shadow>> false
+skinparam shadowing<<with_shadow>> true
+hide <<with_shadow>> stereotype
+
+
+package "createSecret.js" <<Dependencies>> {
+  [libsodium-wrappers] <<with_shadow>>
+  [sodium] <<with_shadow>>
+}
+
+@enduml
